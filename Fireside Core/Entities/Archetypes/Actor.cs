@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Fireside_Core.Database;
 using Fireside_Core.Interfaces;
 using Fireside_Core.Structural;
 
@@ -13,7 +14,7 @@ namespace Fireside_Core.Entities.Archetypes
         #region Public_Members
         
         public abstract Action OnSelected { get; }
-
+        
         #endregion
         
         #region Protected_Members
@@ -43,9 +44,18 @@ namespace Fireside_Core.Entities.Archetypes
         
         #endregion
 
-        protected Actor()
+        public Actor()
         {
             stats = new Dictionary<string, Stat>();
+        }
+        
+        /// <summary>
+        /// Prototype ctor.
+        /// </summary>
+        /// <param name="source">Clone original</param>
+        protected Actor(Actor source) : base(source)
+        {
+            stats = source.stats;
         }
         
         public abstract bool CanBePlayed();
@@ -63,6 +73,15 @@ namespace Fireside_Core.Entities.Archetypes
         public Stat GetStat(string statName)
         {
             return stats[statName];
+        }
+        
+        /// <summary>
+        /// Get metadata of this actor.
+        /// </summary>
+        /// <returns>Actor metadata</returns>
+        public override EntityData GetData()
+        {
+            return (ActorData)base.GetData();
         }
     }
 }

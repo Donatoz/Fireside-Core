@@ -24,9 +24,19 @@ namespace Fireside_Core.Entities.Realisations
 
         #endregion
 
-        public override void Initialize()
+        public override void Initialize(int id)
         {
             
+        }
+
+        protected Card(Card source) : base(source)
+        {
+            
+        }
+
+        public override Entity Clone()
+        {
+            return new Card(this);
         }
 
         public override bool CanBePlayed()

@@ -1,7 +1,9 @@
-﻿namespace Fireside_Core.Entities
+﻿using Fireside_Core.Database;
+
+namespace Fireside_Core.Entities
 {
     /// <summary>
-    /// Base class for all game objects.
+    /// Base class for all game objects and contains only object game- and metadata.
     /// </summary>
     public abstract class Entity
     {
@@ -16,12 +18,51 @@
         /// Unique ID which offers fast access to the entity (through manager).
         /// </summary>
         public string ReferenceId { get; }
-        
+
         #endregion
+
+        #region Private_Members
+
+        /// <summary>
+        /// Entity data which is taken from database.
+        /// </summary>
+        private EntityData metaData;
+
+        #endregion
+        
+        public Entity()
+        {
+            //TODO: Give refId
+        }
+        
+        /// <summary>
+        /// Prototype ctor.
+        /// </summary>
+        /// <param name="source">Clone original</param>
+        protected Entity(Entity source)
+        {
+            Name = source.Name;
+        }
         
         /// <summary>
         /// Entity initialization (after ctor).
         /// </summary>
-        public abstract void Initialize();
+        /// <param name="id">Id in database</param>
+        public abstract void Initialize(int id);
+        
+        /// <summary>
+        /// Clone game object.
+        /// </summary>
+        /// <returns>New instance of entity with same values.</returns>
+        public abstract Entity Clone();
+        
+        /// <summary>
+        /// Get metadata of this entity.
+        /// </summary>
+        /// <returns>Entity metadata</returns>
+        public virtual EntityData GetData()
+        {
+            return metaData;
+        }
     }
 }

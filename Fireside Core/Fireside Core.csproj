@@ -6,7 +6,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Folder Include="Builders" />
+      <Folder Include="Extensions" />
       <Folder Include="Management" />
+      <Folder Include="Strategies" />
     </ItemGroup>
 
 </Project>

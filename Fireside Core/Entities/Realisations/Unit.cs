@@ -18,9 +18,23 @@ namespace Fireside_Core.Entities.Realisations
 
         #endregion
         
-        public override void Initialize()
+        public override void Initialize(int id)
         {
             
+        }
+        
+        /// <summary>
+        /// Prototype ctor.
+        /// </summary>
+        /// <param name="source">Clone original</param>
+        protected Unit(Unit source) : base(source)
+        {
+            
+        }
+
+        public override Entity Clone()
+        {
+            return new Unit(this);
         }
 
         public override bool CanBePlayed()
