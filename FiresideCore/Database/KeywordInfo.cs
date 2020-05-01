@@ -17,5 +17,11 @@ namespace FiresideCore.Database
         /// Keyword database id.
         /// </summary>
         public int Id;
+
+        public KeywordInfo(string name, int id)
+        {
+            Name = name;
+            Id = id;
+        }
     }
 }
