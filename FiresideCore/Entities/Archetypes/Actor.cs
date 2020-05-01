@@ -24,6 +24,11 @@ namespace FiresideCore.Entities.Archetypes
         /// Actor's main stats.
         /// </summary>
         protected Dictionary<string, Stat> stats;
+        
+        /// <summary>
+        /// Actor-level equality check.
+        /// </summary>
+        protected Func<object, bool> actorEquality;
 
         #endregion
 
@@ -49,13 +54,14 @@ namespace FiresideCore.Entities.Archetypes
         protected Actor()
         {
             stats = new Dictionary<string, Stat>();
-            equalityCheck += obj =>
+            actorEquality = obj =>
             {
-                if (!(obj is Actor)) return false;
+                if (!(obj is Actor) || ((Actor) obj).stats.Count != stats.Count) return false;
 
                 return ((Actor) obj).stats
                     .All(stat => stats[stat.Key] != null 
-                                 && Equals(stats[stat.Key], stat.Value));
+                                 && stats[stat.Key].Equals(stat.Value)
+                    );
             };
         }
         
@@ -67,7 +73,18 @@ namespace FiresideCore.Entities.Archetypes
         {
             stats = source.stats;
         }
-        
+
+        public override bool Equals(object? obj)
+        {
+            if (!base.Equals(obj)) return false;
+            
+            if (!(obj is Actor) || ((Actor) obj).stats.Count != stats.Count) return false;
+
+            return ((Actor) obj).stats
+                .All(stat => stats[stat.Key] != null 
+                             && stats[stat.Key].Equals(stat.Value));
+        }
+
         public abstract bool CanBePlayed();
         
         /// <summary>

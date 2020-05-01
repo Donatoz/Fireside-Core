@@ -10,12 +10,12 @@ namespace FiresideCore.Structural
         #region Private_Members
         
         /// <summary>
-        /// Keyword metadata.
+        /// Keyword metadata (immutable).
         /// </summary>
-        private KeywordInfo metaData;
+        private readonly KeywordInfo metaData;
 
         #endregion
-
+        
         public Keyword(KeywordInfo metaData)
         {
             this.metaData = metaData;
@@ -27,6 +27,15 @@ namespace FiresideCore.Structural
 
             var k = (Keyword) obj;
             return metaData.Id == k.metaData.Id;
+        }
+        
+        /// <summary>
+        /// Get keyword base id from metadata.
+        /// </summary>
+        /// <returns>Meta id</returns>
+        public int GetMetaId()
+        {
+            return metaData.Equals(default) ? -1 : metaData.Id;
         }
     }
 }

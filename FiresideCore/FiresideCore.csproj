@@ -5,8 +5,9 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Folder Include="Attributes" />
       <Folder Include="Builders" />
-      <Folder Include="Modules" />
+      <Folder Include="Modules\Cards" />
       <Folder Include="Strategies" />
     </ItemGroup>
 

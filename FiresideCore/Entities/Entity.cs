@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Reflection;
 using FiresideCore.Database;
 using FiresideCore.Management;
 
@@ -30,14 +32,16 @@ namespace FiresideCore.Entities
         /// </summary>
         protected EntityData metaData;
 
-        protected Func<object, bool> equalityCheck;
+        /// <summary>
+        /// List of all entity extensions.
+        /// </summary>
+        protected List<Module> modules;
 
         #endregion
         
         protected Entity()
         {
             ReferenceId = ReferenceManager.AddEntity(this);
-            equalityCheck = obj => Name == ((Entity) obj).Name && ReferenceId == ((Entity) obj).ReferenceId;
         }
         
         /// <summary>
@@ -66,7 +70,7 @@ namespace FiresideCore.Entities
             if (!(obj is Entity)) return false;
             Entity e = (Entity) obj;
 
-            return equalityCheck(obj);
+            return Name == ((Entity) obj).Name && ReferenceId == ((Entity) obj).ReferenceId;
         }
 
         /// <summary>

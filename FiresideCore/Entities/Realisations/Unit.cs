@@ -1,6 +1,4 @@
 ﻿using System;
-using FiresideCore.Database;
-using FiresideCore.Database.Categories;
 using FiresideCore.Entities.Archetypes;
 
 namespace FiresideCore.Entities.Realisations
@@ -12,6 +10,9 @@ namespace FiresideCore.Entities.Realisations
     {
         #region Events
         
+        /// <summary>
+        /// Delegate for all events connected to unit behavior changes.
+        /// </summary>
         public delegate void UnitStateChange();
         
         /// <summary>
