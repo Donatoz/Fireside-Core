@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fireside Core", "Fireside Core\Fireside Core.csproj", "{F912B21F-5239-41AB-A2F1-01FF9A751AE0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FiresideCore", "FiresideCore\FiresideCore.csproj", "{F912B21F-5239-41AB-A2F1-01FF9A751AE0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FiresideCoreTests", "FiresideCoreTests\FiresideCoreTests.csproj", "{CE2FE8AD-73B9-433D-9400-07C4427EA73B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -12,5 +14,9 @@ Global
 		{F912B21F-5239-41AB-A2F1-01FF9A751AE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F912B21F-5239-41AB-A2F1-01FF9A751AE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F912B21F-5239-41AB-A2F1-01FF9A751AE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE2FE8AD-73B9-433D-9400-07C4427EA73B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE2FE8AD-73B9-433D-9400-07C4427EA73B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE2FE8AD-73B9-433D-9400-07C4427EA73B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE2FE8AD-73B9-433D-9400-07C4427EA73B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
