@@ -8,7 +8,7 @@ namespace FiresideCore.Management
     /// <summary>
     /// Deals with all entities in game (giving them refId, finding entities in game, etc...).
     /// </summary>
-    public static class EntityManager
+    public static class ReferenceManager
     {
         #region Private_Members
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using FiresideCore.Database;
 using FiresideCore.Database.Categories;
 using FiresideCore.Entities.Archetypes;
@@ -48,8 +49,8 @@ namespace FiresideCore.Entities.Realisations
 
         public override void Initialize(int id)
         {
-            CardData data = CardDatabase.GetInstance().GetItem(id);
-            if(data == null) return;
+            var data = CardDatabase.GetInstance().GetItem(id);
+            if (data == null) return;
             
             //Entity level
             metaData = data;
@@ -71,6 +72,14 @@ namespace FiresideCore.Entities.Realisations
         protected Card(Card source) : base(source)
         {
             keywords = source.keywords;
+            equalityCheck += obj =>
+            {
+                if (!(obj is Card)) return false;
+
+                return ((Card) obj).keywords
+                    .All(keyword => keywords
+                        .Find(k => k.Equals(keyword)) != null);
+            };
         }
 
         internal Card(int id)

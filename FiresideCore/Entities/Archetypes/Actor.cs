@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using FiresideCore.Database;
 using FiresideCore.Interfaces;
 using FiresideCore.Structural;
@@ -45,9 +46,17 @@ namespace FiresideCore.Entities.Archetypes
         
         #endregion
 
-        public Actor()
+        protected Actor()
         {
             stats = new Dictionary<string, Stat>();
+            equalityCheck += obj =>
+            {
+                if (!(obj is Actor)) return false;
+
+                return ((Actor) obj).stats
+                    .All(stat => stats[stat.Key] != null 
+                                 && Equals(stats[stat.Key], stat.Value));
+            };
         }
         
         /// <summary>

@@ -32,7 +32,7 @@ namespace FiresideCoreTests.Unit.Entities.Entity
         [Test]
         public void Test()
         {
-            Assert.AreEqual(EntityManager.FindEntity(basicEntity.ReferenceId), basicEntity);
+            Assert.AreEqual(ReferenceManager.FindEntity(basicEntity.ReferenceId), basicEntity);
             Assert.AreEqual(databaseEntity.Name, "TestCard");
         }
 

@@ -20,5 +20,13 @@ namespace FiresideCore.Structural
         {
             this.metaData = metaData;
         }
+
+        public override bool Equals(object? obj)
+        {
+            if (!(obj is Keyword)) return false;
+
+            var k = (Keyword) obj;
+            return metaData.Id == k.metaData.Id;
+        }
     }
 }

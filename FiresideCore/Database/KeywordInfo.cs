@@ -12,5 +12,10 @@ namespace FiresideCore.Database
         /// Keyword default name.
         /// </summary>
         public string Name;
+        
+        /// <summary>
+        /// Keyword database id.
+        /// </summary>
+        public int Id;
     }
 }

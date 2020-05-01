@@ -85,6 +85,16 @@ namespace FiresideCore.Structural
             modifiers.Add(modifier);
         }
 
+        public override bool Equals(object? obj)
+        {
+            if (!(obj is Stat)) return false;
+
+            var s = (Stat) obj;
+            return s.EffectiveValue == EffectiveValue
+                   && s.modifiers.Count == modifiers.Count
+                   && BaseValue == s.BaseValue;
+        }
+
         public void RemoveModifier(Modifier modifier)
         {
             modifiers.Remove(modifier);

@@ -1,4 +1,5 @@
-﻿using FiresideCore.Database;
+﻿using System;
+using FiresideCore.Database;
 using FiresideCore.Management;
 
 namespace FiresideCore.Entities
@@ -22,18 +23,21 @@ namespace FiresideCore.Entities
 
         #endregion
 
-        #region Private_Members
+        #region Protected_Members
 
         /// <summary>
         /// Entity data which is taken from database.
         /// </summary>
         protected EntityData metaData;
 
+        protected Func<object, bool> equalityCheck;
+
         #endregion
         
         protected Entity()
         {
-            ReferenceId = EntityManager.AddEntity(this);
+            ReferenceId = ReferenceManager.AddEntity(this);
+            equalityCheck = obj => Name == ((Entity) obj).Name && ReferenceId == ((Entity) obj).ReferenceId;
         }
         
         /// <summary>
@@ -56,6 +60,14 @@ namespace FiresideCore.Entities
         /// </summary>
         /// <returns>New instance of entity with same values.</returns>
         public abstract Entity Clone();
+
+        public override bool Equals(object? obj)
+        {
+            if (!(obj is Entity)) return false;
+            Entity e = (Entity) obj;
+
+            return equalityCheck(obj);
+        }
 
         /// <summary>
         /// Get metadata of this entity.
