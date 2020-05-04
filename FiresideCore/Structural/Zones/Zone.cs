@@ -1,13 +1,23 @@
-﻿using System.Collections.Generic;
-using FiresideCore.Interfaces;
+﻿using System.Collections;
+using System.Collections.Generic;
+using FiresideCore.Entities;
 
 namespace FiresideCore.Structural.Zones
 {
     /// <summary>
-    /// Represents game zone which holds content of specific type (cards, units, etc...) and which can be modified.
+    /// Represents IEnumerable with maximum size.
     /// </summary>
-    public abstract class Zone<T> where T : IPlayable
+    public class Zone<T> : IEnumerable<T>
     {
+        #region Public_Members
+        
+        /// <summary>
+        /// Maximum amount of items this zone can have.
+        /// </summary>
+        public readonly int MaxSize;
+
+        #endregion
+        
         #region Protected_Members
         
         /// <summary>
@@ -16,5 +26,35 @@ namespace FiresideCore.Structural.Zones
         protected List<T> content;
 
         #endregion
+
+        #region Events
+        
+        /// <summary>
+        /// Delegate for all content changes inside zone.
+        /// </summary>
+        /// <param name="item"></param>
+        public delegate T ContentChanged(T item);
+        
+        /// <summary>
+        /// Invokes when item HAS been added to the zone.
+        /// </summary>
+        public event ContentChanged OnItemAdded;
+        
+        /// <summary>
+        /// Invokes when item HAS been removed from the zone.
+        /// </summary>
+        public event ContentChanged OnItemRemoved;
+        
+        #endregion
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            return content.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
     }
 }

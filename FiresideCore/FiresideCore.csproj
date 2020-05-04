@@ -7,8 +7,15 @@
     <ItemGroup>
       <Folder Include="Attributes" />
       <Folder Include="Builders" />
-      <Folder Include="Modules\Cards" />
+      <Folder Include="Exceptions" />
+      <Folder Include="Modules\Archetypes" />
       <Folder Include="Strategies" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="MySql.Data, Version=8.0.20.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d">
+        <HintPath>..\..\..\..\..\Program Files (x86)\MySQL\Connector NET 8.0\Assemblies\v4.5.2\MySql.Data.dll</HintPath>
+      </Reference>
     </ItemGroup>
 
 </Project>

@@ -16,9 +16,16 @@ namespace FiresideCore.Entities.Realisations
         public delegate void UnitStateChange();
         
         /// <summary>
+        /// Delegate for all unit actions.
+        /// </summary>
+        /// <param name="target"></param>
+        /// <typeparam name="T"></typeparam>
+        public delegate void UnitAction<in T>(T target);
+        
+        /// <summary>
         /// Invokes when unit IS attacking.
         /// </summary>
-        public event UnitStateChange OnAttack;
+        public event UnitAction<Actor> OnAttack;
 
         #endregion
         
@@ -27,9 +34,9 @@ namespace FiresideCore.Entities.Realisations
             
         }
 
-        internal Unit(int id)
+        internal Unit()
         {
-            Initialize(id);
+            
         }
         
         /// <summary>

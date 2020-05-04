@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using FiresideCore.Entities.Realisations;
-using FiresideCore.Structural;
+using FiresideCore.Modules.Playables;
 
 namespace FiresideCore.Entities
 {
@@ -16,21 +16,39 @@ namespace FiresideCore.Entities
         private static int currentId = 0;
         
         /// <summary>
+        /// Used for initializing entities.
+        /// </summary>
+        private static Player currentCreator = null;
+        
+        /// <summary>
         /// List of available descriptors.
         /// </summary>
         private static readonly List<EntityDescriptor> nativeDescriptors = new List<EntityDescriptor>
         {
-            new EntityDescriptor(typeof(Card), () => new Card(currentId)),
-            new EntityDescriptor(typeof(Unit), () => new Unit(currentId))
+            new EntityDescriptor(typeof(Card), () =>
+            {
+                var c = new Card();
+                c.Initialize(currentId);
+                c.AddModule(new ControlModule(c, currentCreator));
+                return c;
+            }),
+            
+            new EntityDescriptor(typeof(Unit), () =>
+            {
+                var u = new Unit();
+                u.Initialize(currentId);
+                u.AddModule(new ControlModule(u, currentCreator));
+                return u;
+            })
         };
-        
+
         /// <summary>
         /// Create new entity.
         /// </summary>
         /// <param name="entityType">Entity subtype (Card, unit, etc...)</param>
         /// <param name="id">Global id (in database)</param>
         /// <returns>New entity if all requirements were met, null otherwise.</returns>
-        public static Entity Create(Type entityType, int id = 0)
+        public static Entity Create(Type entityType, Player controller, int id = 0)
         {
             if (!entityType.IsSubclassOf(typeof(Entity))) return null;
 
@@ -41,6 +59,7 @@ namespace FiresideCore.Entities
                 if (validDescriptor != null) break;
             }
 
+            currentCreator = controller;
             currentId = id;
             return validDescriptor?.Invoke();
         }

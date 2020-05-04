@@ -16,6 +16,11 @@ namespace FiresideCore.Entities.Realisations
         #region Public_Members
 
         public override Action OnSelected { get; }
+        
+        /// <summary>
+        /// Card rarity.
+        /// </summary>
+        public Rarity CardRarity; 
 
         #endregion
         
@@ -53,12 +58,17 @@ namespace FiresideCore.Entities.Realisations
         public event CardStateChanged OnDraw;
         
         /// <summary>
-        /// Invokes when some keyword is being added/removed from this card.
+        /// Invokes when some keyword is being added to this card.
         /// </summary>
         public event CardValueChanged<Keyword> OnKeywordAdded;
 
-        #endregion
+        /// <summary>
+        /// Invokes when some keyword is being removed from this card.
+        /// </summary>
+        public event CardValueChanged<Keyword> OnKeywordRemoved;
 
+        #endregion
+        
         public override void Initialize(int id)
         {
             // Get data from card database
@@ -84,7 +94,7 @@ namespace FiresideCore.Entities.Realisations
 
         protected Card(Card source) : base(source)
         {
-            keywords = source.keywords;
+            keywords = new List<Keyword>(source.keywords);
         }
 
         public override bool Equals(object? obj)
@@ -97,10 +107,9 @@ namespace FiresideCore.Entities.Realisations
                 .All(keyword => keywords.Find(k => k.Equals(keyword)) != null);
         }
 
-        internal Card(int id)
+        internal Card()
         {
             keywords = new List<Keyword>();
-            Initialize(id);
         }
         
         /// <summary>
@@ -120,7 +129,10 @@ namespace FiresideCore.Entities.Realisations
         /// <param name="metaId">Keyword meta id</param>
         public void RemoveKeyword(int metaId)
         {
-            keywords.Remove(keywords.Find(keyword => keyword.GetMetaId() == metaId));
+            var found = keywords.Find(keyword => keyword.GetMetaId() == metaId);
+            if(found == null) return;
+            keywords.Remove(found);
+            OnKeywordRemoved?.Invoke(found);
         }
 
         public override Entity Clone()
@@ -131,6 +143,15 @@ namespace FiresideCore.Entities.Realisations
         public override bool CanBePlayed()
         {
             return false;
+        }
+        
+        /// <summary>
+        /// Get list of all card keywords.
+        /// </summary>
+        /// <returns>Readonly card's keywords list.</returns>
+        public IReadOnlyList<Keyword> GetKeywords()
+        {
+            return keywords.AsReadOnly();
         }
 
         public override EntityData GetData()

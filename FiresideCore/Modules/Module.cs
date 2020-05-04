@@ -10,6 +10,11 @@ namespace FiresideCore.Modules
         /// <summary>
         /// Target entity.
         /// </summary>
-        public Entity AttachedEntity { get; protected set; }
+        public Entity AttachedEntity { get; }
+
+        public Module(Entity attachedEntity)
+        {
+            AttachedEntity = attachedEntity;
+        }
     }
 }

@@ -21,7 +21,7 @@ namespace FiresideCore.Structural
             this.metaData = metaData;
         }
 
-        public override bool Equals(object? obj)
+        public override bool Equals(object obj)
         {
             if (!(obj is Keyword)) return false;
 
@@ -36,6 +36,15 @@ namespace FiresideCore.Structural
         public int GetMetaId()
         {
             return metaData.Equals(default) ? -1 : metaData.Id;
+        }
+        
+        /// <summary>
+        /// Get keyword's name.
+        /// </summary>
+        /// <returns>Name</returns>
+        public string GetName()
+        {
+            return metaData.Name;
         }
     }
 }

@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
+using System.Linq;
 using FiresideCore.Database;
 using FiresideCore.Management;
+using FiresideCore.Modules;
 
 namespace FiresideCore.Entities
 {
     /// <summary>
-    /// Base class for all game objects and contains only object game- and metadata.
+    /// Base class for all game objects and contains only object game- and metadata and holds modules.
     /// </summary>
     public abstract class Entity
     {
@@ -42,6 +43,7 @@ namespace FiresideCore.Entities
         protected Entity()
         {
             ReferenceId = ReferenceManager.AddEntity(this);
+            modules = new List<Module>();
         }
         
         /// <summary>
@@ -51,6 +53,8 @@ namespace FiresideCore.Entities
         protected Entity(Entity source)
         {
             Name = source.Name;
+            modules = new List<Module>(source.modules);
+            ReferenceId = ReferenceManager.AddEntity(this);
         }
         
         /// <summary>
@@ -65,12 +69,39 @@ namespace FiresideCore.Entities
         /// <returns>New instance of entity with same values.</returns>
         public abstract Entity Clone();
 
-        public override bool Equals(object? obj)
+        public override bool Equals(object obj)
         {
             if (!(obj is Entity)) return false;
-            Entity e = (Entity) obj;
+            var e = (Entity) obj;
 
-            return Name == ((Entity) obj).Name && ReferenceId == ((Entity) obj).ReferenceId;
+            return Name == ((Entity) obj).Name;
+        }
+        
+        /// <summary>
+        /// Extend entity functionality with specific module.
+        /// </summary>
+        public void AddModule(Module module)
+        {
+            if (modules.Any(m => m.GetType() == module.GetType())) return;
+            modules.Add(module);
+        }
+        
+        /// <summary>
+        /// Remove module of specific type.
+        /// </summary>
+        /// <param name="moduleType">Type of module which is being removed</param>
+        public void RemoveModule(Type moduleType)
+        {
+            modules.Remove(modules.Find(m => m.GetType() == moduleType));
+        }
+        
+        /// <summary>
+        /// Get all modules only for reading.
+        /// </summary>
+        /// <returns>Readonly list of modules</returns>
+        public IReadOnlyList<Module> GetModules()
+        {
+            return modules.AsReadOnly();
         }
 
         /// <summary>

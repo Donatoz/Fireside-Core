@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using FiresideCore.Entities.Realisations;
+using FiresideCore.Modules.Databases;
 
 namespace FiresideCore.Database.Categories
 {
@@ -24,6 +25,15 @@ namespace FiresideCore.Database.Categories
                 instance = new CardDatabase();
             return instance;
         }
+
+        #endregion
+
+        #region Private_Members
+        
+        /// <summary>
+        /// Extern cloud card database.
+        /// </summary>
+        private CloudDatabaseModule cloudDatabase;
 
         #endregion
         

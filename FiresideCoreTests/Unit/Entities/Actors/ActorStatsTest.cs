@@ -5,6 +5,7 @@ using FiresideCore.Entities.Archetypes;
 using FiresideCore.Entities.Realisations;
 using FiresideCore.Extensions;
 using FiresideCore.Structural;
+using FiresideCoreTests.Utils;
 using NUnit.Framework;
 
 namespace FiresideCoreTests.Unit.Entities.Actors
@@ -27,8 +28,8 @@ namespace FiresideCoreTests.Unit.Entities.Actors
             data.Stats.Add(new StatInfo{Name = "Health", Value = 1});
             CardDatabase.GetInstance().AddItem(data);
             
-            testActor = EntityFactory.Create(typeof(Card), 1).AsActor();
-            modifiedActor = EntityFactory.Create(typeof(Card), 1).AsActor();
+            testActor = EntityFactory.Create(typeof(Card), TestDefaults.MainPlayer, 1).AsActor();
+            modifiedActor = EntityFactory.Create(typeof(Card), TestDefaults.MainPlayer,1).AsActor();
             modifiedActor.ChangeStat("Health", new Modifier(4));
         }
 

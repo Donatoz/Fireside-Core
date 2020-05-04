@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using FiresideCore.Database;
 using FiresideCore.Interfaces;
+using FiresideCore.Modules.Playables;
 using FiresideCore.Structural;
 
 namespace FiresideCore.Entities.Archetypes
@@ -50,19 +52,10 @@ namespace FiresideCore.Entities.Archetypes
         public event ActorStateChanged OnBirth;
         
         #endregion
-
+        
         protected Actor()
         {
             stats = new Dictionary<string, Stat>();
-            actorEquality = obj =>
-            {
-                if (!(obj is Actor) || ((Actor) obj).stats.Count != stats.Count) return false;
-
-                return ((Actor) obj).stats
-                    .All(stat => stats[stat.Key] != null 
-                                 && stats[stat.Key].Equals(stat.Value)
-                    );
-            };
         }
         
         /// <summary>
@@ -71,10 +64,10 @@ namespace FiresideCore.Entities.Archetypes
         /// <param name="source">Clone original</param>
         protected Actor(Actor source) : base(source)
         {
-            stats = source.stats;
+            stats = new Dictionary<string, Stat>(source.stats);
         }
 
-        public override bool Equals(object? obj)
+        public override bool Equals(object obj)
         {
             if (!base.Equals(obj)) return false;
             
@@ -120,7 +113,7 @@ namespace FiresideCore.Entities.Archetypes
         /// <returns>Actor metadata</returns>
         public override EntityData GetData()
         {
-            return (ActorData)base.GetData();
+            return (ActorData) base.GetData();
         }
     }
 }
