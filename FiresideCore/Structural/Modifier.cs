@@ -1,9 +1,19 @@
 ﻿namespace FiresideCore.Structural
 {
+    /// <summary>
+    /// Represents value container.
+    /// </summary>
     public struct Modifier
     {
-        public string Id;
-        public int Value;
+        /// <summary>
+        /// Modifier id.
+        /// </summary>
+        public readonly string Id;
+        
+        /// <summary>
+        /// Modifier value.
+        /// </summary>
+        public readonly int Value;
 
         public Modifier(int value, string id = "modifier")
         {

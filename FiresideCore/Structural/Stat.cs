@@ -79,7 +79,11 @@ namespace FiresideCore.Structural
             OriginalValue = baseValue;
             modifiers = new List<Modifier>();
         }
-
+        
+        /// <summary>
+        /// Modify stat by adding new modifier.
+        /// </summary>
+        /// <param name="modifier">New modifier</param>
         public void AddModifier(Modifier modifier)
         {
             modifiers.Add(modifier);
@@ -94,7 +98,11 @@ namespace FiresideCore.Structural
                    && s.modifiers.Count == modifiers.Count
                    && BaseValue == s.BaseValue;
         }
-
+        
+        /// <summary>
+        /// Remove modifier from stat.
+        /// </summary>
+        /// <param name="modifier">Existing modifier</param>
         public void RemoveModifier(Modifier modifier)
         {
             modifiers.Remove(modifier);
