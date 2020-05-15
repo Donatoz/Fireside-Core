@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading;
-using System.Linq;
 using FiresideCore.Enums;
 
 namespace FiresideCore.Mechanics.Instructions

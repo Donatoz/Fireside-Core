@@ -22,6 +22,20 @@ namespace FiresideCore.Mechanics
 
         #endregion
 
+        #region Events
+        
+        /// <summary>
+        /// Delegate for all instruction state changes.
+        /// </summary>
+        public delegate void InstructionStateChange();
+        
+        /// <summary>
+        /// Invokes when instruction context has been successfully invoked.
+        /// </summary>
+        public event InstructionStateChange OnInstructionComplete;
+
+        #endregion
+
         /// <summary>
         /// Invoke instruction context (only when instruction is ready (i.e. not running))
         /// </summary>

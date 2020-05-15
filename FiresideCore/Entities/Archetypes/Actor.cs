@@ -10,7 +10,7 @@ using FiresideCore.Structural;
 namespace FiresideCore.Entities.Archetypes
 {
     /// <summary>
-    /// Represents all acting entities in the game.
+    /// Represents all acting entities which are already in the running state.
     /// </summary>
     public abstract class Actor : Entity, IPlayable, IVulnerable
     {
