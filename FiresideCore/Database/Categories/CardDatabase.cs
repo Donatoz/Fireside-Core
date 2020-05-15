@@ -12,8 +12,12 @@ namespace FiresideCore.Database.Categories
         #region Singleton
 
         private static CardDatabase instance;
-        
-        private CardDatabase() {}
+
+        private CardDatabase()
+        {
+            //TODO: do something that could make cloud database module more flexible.
+            cloudDatabase = new MySQLDatabaseModule();
+        }
         
         /// <summary>
         /// Get global instance of the card database.
@@ -21,22 +25,13 @@ namespace FiresideCore.Database.Categories
         /// <returns>Instance of card database</returns>
         public static CardDatabase GetInstance()
         {
-            if(instance == null) 
+            if (instance == null) 
                 instance = new CardDatabase();
             return instance;
         }
 
         #endregion
 
-        #region Private_Members
-        
-        /// <summary>
-        /// Extern cloud card database.
-        /// </summary>
-        private CloudDatabaseModule cloudDatabase;
-
-        #endregion
-        
         /// <summary>
         /// Add new card to the database.
         /// </summary>
