@@ -22,22 +22,22 @@ namespace FiresideCore.Entities
         /// <summary>
         /// A zone, where all not yet drawn card are held.
         /// </summary>
-        private Zone<Card> deck;
+        private Zone<Card> deck = new Zone<Card>();
         
         /// <summary>
         /// A zone, where all drawn cards and playable cards are held.
         /// </summary>
-        private Zone<Card> hand;
+        private Zone<Card> hand = new Zone<Card>();
         
         /// <summary>
         /// A zone, where all alive units are held.
         /// </summary>
-        private Zone<Unit> board;
+        private Zone<Unit> board = new Zone<Unit>();
         
         /// <summary>
         /// A zone, where all dead units are held.
         /// </summary>
-        private Zone<Unit> graveyard;
+        private Zone<Unit> graveyard = new Zone<Unit>();
 
         #endregion
 

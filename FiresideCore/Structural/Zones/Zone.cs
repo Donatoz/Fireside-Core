@@ -14,7 +14,7 @@ namespace FiresideCore.Structural.Zones
         /// <summary>
         /// Maximum amount of items this zone can have.
         /// </summary>
-        public readonly int MaxSize;
+        public int MaxSize;
 
         #endregion
         
