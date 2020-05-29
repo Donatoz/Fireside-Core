@@ -1,0 +1,17 @@
+SCRIPT {
+	var iterations_count = 0
+	
+	# INSTRUCTION block represents some loop, which iterates ACTION blocks with some interval.
+	INSTRUCTION {
+		Id = "coroutine1"
+		Interval = 1
+		
+		# Instruction can have iterations limit. Limit is -1 (no limit) by default.
+		Iterations = 10
+		
+		ACTION {
+			iterations_count++
+			debug(iterations_count)
+		}
+	}
+}

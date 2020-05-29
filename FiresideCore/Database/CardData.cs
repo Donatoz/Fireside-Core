@@ -13,5 +13,7 @@ namespace FiresideCore.Database
         /// Information about all card's default keywords.
         /// </summary>
         public List<KeywordInfo> Keywords = new List<KeywordInfo>();
+
+        internal CardAbilityInfo CardAbility;
     }
 }

@@ -22,7 +22,7 @@ namespace FiresideCore.Mechanics.Abilities
         /// <summary>
         /// Context of the ability which is going to be activated.
         /// </summary>
-        protected internal Instruction context;
+        protected Instruction context;
 
         #endregion
         

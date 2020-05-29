@@ -1,0 +1,19 @@
+# This is a simple version of ability scripts.
+# Such type of scripts can't contain any blocks excluding ACTION blocks
+
+ABILITYSCRIPT {
+	Id = "ability_script_example"
+	Target = @ENEMY @RANDMINION
+	
+	ACTION {
+		# Simple loop, takes iterations count as parameter.
+		sfor(10) {
+			deal_damage(Target, 1)
+		}
+		
+		# Default loop like in C languages.
+		for(a = 0, a < 10, a + 1) {
+			deal_damage(Target, 1)
+		}
+	}
+}

@@ -1,0 +1,71 @@
+﻿# Simple script example. This script is of card-ability type.
+# This script takes as target any enemy/ally minion and deals 5 damage to it.
+# Any script must begin with SCRIPT keyword and it's body.
+SCRIPT {
+    # This is an example of script variable.
+    # Script variables can be accessed in any part of the script,
+    # which is below the declaration of script variable.
+    var some_var = 1
+	# This variable contains only value of some_var
+	var val_var = some_var
+	# This variable contains reference to the some_var.
+	var ref_var = refto some_var
+	# Reference to this script
+	var this_script = refto "C:\Users\Grish\RiderProjects\Fireside Core\FiresideCore\Descriptors\Abilities\example.fscript"
+    
+    # This script is ability-type script,
+    # so it should include ABILITY keyword and it's body.
+    ABILITY {
+		# These variables are special for ACTION block.
+        Id = "test ability"
+		
+		# This special variable can use ABSTRACTIONS (@) as value.
+        Target = @ENEMY,@ALLY,@MINION
+		
+		# This is internal (not global) variable which can be used only inside some block.
+		ivar internal_var = 0
+		
+        # This is an action block which represents context of the ABILITY block.
+		# Note: ACTION block can be used outside ABILITY block, thereby it will be executed anyway.
+        ACTION {
+			# These are built-in functions.
+            deal_damage(Target, 5)
+            some_var = 2
+        }
+        
+		# There can be multiple ACTION blocks inside script.
+        ACTION { 
+            debug("123")
+        }
+    }
+	
+	# FUNC block represents function and can be executed in any time.
+	FUNC SomeFunction() {
+		debug("SomeFunction")
+	}
+	
+	# Function can return some value and take parameters.
+	FUNC SomeValueFunc(param) {
+		ivar one = 1
+		# 'out' keyword is like 'return' keyword in C languages.
+		out param + one
+	}
+	
+	# Function can contain reference to another functions. 
+	# These functions will be called after the main (RefFunc() in this case) function.
+	FUNC RefFunc() refto SomeFunction() {
+		
+	}
+	
+	# Recursive function.
+	FUNC Factorial(n) {
+		# 'This' keyword represents block itself.
+		return n * This(n-1)
+	}
+	
+	# ACTION block inside script can be considered as anonymous function.
+	
+	ACTION {
+		debug("Script ended")
+	}
+}
