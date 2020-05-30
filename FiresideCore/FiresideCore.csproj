@@ -7,7 +7,6 @@
     <ItemGroup>
       <Folder Include="Attributes" />
       <Folder Include="Exceptions" />
-      <Folder Include="FireScript" />
       <Folder Include="Modules\Archetypes" />
       <Folder Include="Runtime" />
       <Folder Include="Strategies" />
