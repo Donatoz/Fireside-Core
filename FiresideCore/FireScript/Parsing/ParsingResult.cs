@@ -23,9 +23,14 @@ namespace FiresideCore.FireScript.Parsing
         }
         
         /// <summary>
-        /// Exceptions count thrown in parsing process.
+        /// Exceptions count, thrown in parsing process.
         /// </summary>
         public int ExceptionsCount => exceptions.Count;
+        
+        /// <summary>
+        /// Constructed script.
+        /// </summary>
+        public Script FinalScript;
 
         #endregion
 
@@ -41,6 +46,12 @@ namespace FiresideCore.FireScript.Parsing
         public ParsingResult(params ParsingException[] exceptions)
         {
             this.exceptions = exceptions.ToList();
+            FinalScript = new Script();
+        }
+
+        public void AddException(ParsingException exception)
+        {
+            exceptions.Add(exception);
         }
     }
 }

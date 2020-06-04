@@ -79,7 +79,7 @@ namespace FiresideCore.Modules.Databases
                         {
                             result += reader[i];
                         }
-                        catch (IndexOutOfRangeException e)
+                        catch (IndexOutOfRangeException)
                         {
                             break;
                         }
