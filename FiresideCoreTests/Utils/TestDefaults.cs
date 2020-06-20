@@ -1,4 +1,5 @@
-﻿using FiresideCore.Entities;
+﻿using System.Runtime.InteropServices;
+using FiresideCore.Entities;
 
 namespace FiresideCoreTests.Utils
 {
@@ -9,5 +10,6 @@ namespace FiresideCoreTests.Utils
     {
         public static readonly Player MainPlayer = new Player {Id = 1};
         public static readonly Player Enemy = new Player {Id = 2};
+        
     }
 }

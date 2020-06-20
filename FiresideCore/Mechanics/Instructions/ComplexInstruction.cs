@@ -22,7 +22,7 @@ namespace FiresideCore.Mechanics.Instructions
 
             try
             {
-                context.Invoke();
+                context.Invoke(null);
                 parallelInstructions.ForEach(instruction => instruction.Run());
             }
             catch

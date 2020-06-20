@@ -1,4 +1,5 @@
 ﻿using System;
+using FiresideCore.Entities;
 using FiresideCore.Enums;
 
 namespace FiresideCore.Mechanics.Instructions
@@ -8,6 +9,7 @@ namespace FiresideCore.Mechanics.Instructions
     /// </summary>
     public class PrimitiveInstruction : Instruction
     {
+        public object[] Members;
         public sealed override void Run()
         {
             if (currentState != InstructionState.Ready) return;
@@ -16,7 +18,12 @@ namespace FiresideCore.Mechanics.Instructions
 
             try
             {
-                context.Invoke();
+                if (Members == null)
+                {
+                    currentState = InstructionState.Ready;
+                    return;
+                }
+                context.Invoke(Members);
             }
             catch(Exception e)
             {
@@ -27,9 +34,13 @@ namespace FiresideCore.Mechanics.Instructions
             currentState = InstructionState.Done;
         }
 
-        public PrimitiveInstruction(Action context) : base(context)
+        public PrimitiveInstruction(Action<object[]> context) : base(context)
         {
-            Run();
+        }
+
+        public void SetMembers(params object[] members)
+        {
+            Members = members;
         }
     }
 }

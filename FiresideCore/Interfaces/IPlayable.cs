@@ -1,4 +1,5 @@
 ﻿using System;
+using FiresideCore.Mechanics;
 
 namespace FiresideCore.Interfaces
 {
@@ -8,7 +9,7 @@ namespace FiresideCore.Interfaces
     public interface IPlayable
     {
         /// <summary>
-        /// Does this playable can be played at this moment?
+        /// Can this playable be played at this moment?
         /// </summary>
         /// <returns>True if all conditions are met, false otherwise.</returns>
         bool CanBePlayed();
@@ -16,5 +17,13 @@ namespace FiresideCore.Interfaces
         /// Invokes when playable is being selected.
         /// </summary>
         Action OnSelected { get; }
+        /// <summary>
+        /// Play this playable.
+        /// </summary>
+        void Play(params Instruction[] instructions);
+        /// <summary>
+        /// Must be invoked when playable is being played.
+        /// </summary>
+        public Action OnPlay { get; }
     }
 }

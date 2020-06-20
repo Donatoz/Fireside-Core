@@ -1,4 +1,5 @@
 ﻿using System;
+using FiresideCore.Entities;
 using FiresideCore.Enums;
 
 namespace FiresideCore.Mechanics
@@ -18,7 +19,7 @@ namespace FiresideCore.Mechanics
         /// <summary>
         /// Instruction body which invokes from outside.
         /// </summary>
-        protected Action context { get; }
+        protected Action<object[]> context { get; }
 
         #endregion
 
@@ -45,9 +46,17 @@ namespace FiresideCore.Mechanics
         /// Create new instruction with specific context.
         /// </summary>
         /// <param name="context"></param>
-        public Instruction(Action context)
+        public Instruction(Action<object[]> context)
         {
             this.context = context;
+        }
+
+        public Instruction(Action context)
+        {
+            this.context = delegate
+            {
+                context.Invoke();
+            };
         }
             
         /// <summary>

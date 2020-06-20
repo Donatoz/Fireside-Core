@@ -4,6 +4,8 @@ using System.Linq;
 using FiresideCore.Database;
 using FiresideCore.Database.Categories;
 using FiresideCore.Entities.Archetypes;
+using FiresideCore.Mechanics;
+using FiresideCore.Mechanics.Instructions;
 using FiresideCore.Structural;
 
 namespace FiresideCore.Entities.Realisations
@@ -157,6 +159,13 @@ namespace FiresideCore.Entities.Realisations
         public override EntityData GetData()
         {
             return (CardData)base.GetData();
+        }
+
+        internal override void LoadBasicInstructions()
+        {
+            Control.LoadBasicCommands(
+                
+                );
         }
     }
 }

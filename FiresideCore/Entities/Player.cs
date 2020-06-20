@@ -1,4 +1,6 @@
-﻿using FiresideCore.Entities.Realisations;
+﻿using System;
+using FiresideCore.Entities.Realisations;
+using FiresideCore.Interfaces;
 using FiresideCore.Structural.Zones;
 
 namespace FiresideCore.Entities
@@ -11,9 +13,14 @@ namespace FiresideCore.Entities
         #region Public_Members
 
         /// <summary>
-        /// Player unique id (1 - player, 2 - enemy).
+        /// Player unique id (1 - player, 2 - enemy, 3+ - custom).
         /// </summary>
         public int Id;
+        
+        /// <summary>
+        /// Player's name.
+        /// </summary>
+        public readonly string Name;
 
         #endregion
 
@@ -41,5 +48,9 @@ namespace FiresideCore.Entities
 
         #endregion
 
+        public static Player OwnerFor(IPlayable playable)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

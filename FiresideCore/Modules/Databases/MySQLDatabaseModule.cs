@@ -4,7 +4,7 @@ namespace FiresideCore.Modules.Databases
 {
     public class MySQLDatabaseModule : CloudDatabaseModule
     {
-        public MySQLDatabaseModule()
+        public MySQLDatabaseModule() : base(null)
         {
             AddDefaultRequest(
                 "Test", 

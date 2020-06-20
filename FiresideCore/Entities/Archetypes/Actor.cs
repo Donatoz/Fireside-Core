@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using FiresideCore.Database;
 using FiresideCore.Interfaces;
+using FiresideCore.Mechanics;
 using FiresideCore.Modules.Playables;
 using FiresideCore.Structural;
 
@@ -17,7 +17,7 @@ namespace FiresideCore.Entities.Archetypes
         #region Public_Members
         
         public abstract Action OnSelected { get; }
-        
+
         #endregion
         
         #region Protected_Members
@@ -26,11 +26,19 @@ namespace FiresideCore.Entities.Archetypes
         /// Actor's main stats.
         /// </summary>
         protected Dictionary<string, Stat> stats;
-        
-        /// <summary>
-        /// Actor-level equality check.
-        /// </summary>
-        protected Func<object, bool> actorEquality;
+
+        protected ControlModule Control
+        {
+            get
+            {
+                if (modules.Find(x => x is ControlModule) == null)
+                {
+                    modules.Add(new ControlModule(this, Player.OwnerFor(this)));
+                }
+
+                return modules.Find(x => x is ControlModule) as ControlModule;
+            }
+        }
 
         #endregion
 
@@ -51,6 +59,8 @@ namespace FiresideCore.Entities.Archetypes
         /// </summary>
         public event ActorStateChanged OnBirth;
         
+        public Action OnPlay { get; protected set; }
+
         #endregion
         
         protected Actor()
@@ -79,6 +89,8 @@ namespace FiresideCore.Entities.Archetypes
         }
 
         public abstract bool CanBePlayed();
+
+        internal abstract void LoadBasicInstructions();
         
         /// <summary>
         /// Change some stat value (if actor has this stat ofk, otherwise nothing will happen).
@@ -114,6 +126,11 @@ namespace FiresideCore.Entities.Archetypes
         public override EntityData GetData()
         {
             return (ActorData) base.GetData();
+        }
+        
+        public virtual void Play(params Instruction[] instructions)
+        {
+            throw new NotImplementedException();
         }
     }
 }

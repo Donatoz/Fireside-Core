@@ -20,7 +20,7 @@ namespace FiresideCore.Management
         /// <summary>
         /// Helps with giving new unique reference ids.
         /// </summary>
-        private static int refIdCounter = 0;
+        private static int refIdCounter;
 
         #endregion
 

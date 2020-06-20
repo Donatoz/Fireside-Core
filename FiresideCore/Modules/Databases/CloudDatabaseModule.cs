@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using FiresideCore.Entities;
 using MySql.Data.MySqlClient;
 
 namespace FiresideCore.Modules.Databases
 {
-    public abstract class CloudDatabaseModule
+    public abstract class CloudDatabaseModule : Module
     {
         #region Private_Members
 
@@ -62,6 +63,7 @@ namespace FiresideCore.Modules.Databases
         /// <param name="databaseRequest">SQL request</param>
         private string Request(DatabaseRequest databaseRequest)
         {
+            
             var connection = new MySqlConnection(connectionRequest);
             connection.Open();
             var result = string.Empty;
@@ -88,6 +90,10 @@ namespace FiresideCore.Modules.Databases
             }
             connection.Close();
             return result;
+        }
+
+        protected CloudDatabaseModule(Entity attachedEntity) : base(attachedEntity)
+        {
         }
     }
 }

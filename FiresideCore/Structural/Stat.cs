@@ -8,6 +8,13 @@ namespace FiresideCore.Structural
     /// </summary>
     public class Stat
     {
+        #region Constants
+
+        public const string HEALTH_STAT = "Health";
+        public const string ATTACK_STAT = "Attack";
+
+        #endregion
+        
         #region Public_Members
         
         /// <summary>

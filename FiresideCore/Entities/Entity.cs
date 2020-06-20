@@ -8,7 +8,8 @@ using FiresideCore.Modules;
 namespace FiresideCore.Entities
 {
     /// <summary>
-    /// Base class for all game objects and contains only object game- and metadata and holds modules.
+    /// Base class for all game objects.
+    /// Holds object game- and metadata, and modules.
     /// </summary>
     public abstract class Entity
     {
@@ -72,8 +73,6 @@ namespace FiresideCore.Entities
         public override bool Equals(object obj)
         {
             if (!(obj is Entity)) return false;
-            var e = (Entity) obj;
-
             return Name == ((Entity) obj).Name;
         }
         

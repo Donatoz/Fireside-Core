@@ -31,5 +31,10 @@ namespace FiresideCore.Entities.Realisations
         }
 
         public override Action OnSelected { get; }
+        
+        internal override void LoadBasicInstructions()
+        {
+            
+        }
     }
 }
